@@ -12,6 +12,7 @@
             <option value="$PROJECT_DIR$/buildSrc" />
             <option value="$PROJECT_DIR$/lilycore" />
             <option value="$PROJECT_DIR$/networkmanager" />
+            <option value="$PROJECT_DIR$/presentation" />
             <option value="$PROJECT_DIR$/remote" />
             <option value="$PROJECT_DIR$/retrofit" />
           </set>
