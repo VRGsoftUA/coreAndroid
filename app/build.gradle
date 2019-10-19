@@ -33,7 +33,7 @@ dependencies {
     implementation project(':lilycore')
     implementation project(':remote')
     implementation project(':retrofit')
-    implementation project(':lilyadapter')
+    implementation project(':networkmanager')
 }
 repositories {
     mavenCentral()

@@ -26,12 +26,10 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestImplementation(Libs.espresso_core)
-    implementation Libs.appcompat
-    implementation Libs.recyclerview
-    testImplementation Libs.junit
-    implementation project(':lilycore')
-    implementation Libs.kotlin_stdlib_jdk7
+
+    rootProject.networkManager.each {
+        add(it.configuration, it.dependency, it.options)
+    }
 }
 
 repositories {
