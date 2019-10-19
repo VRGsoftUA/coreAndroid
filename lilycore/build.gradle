@@ -5,13 +5,13 @@ apply plugin: 'com.github.dcendents.android-maven'
 group='com.github.VRGsoftUA'
 
 android {
-    compileSdkVersion rootProject.ext.complie_sdk_version
+    compileSdkVersion sdk_compile_version
 
     defaultConfig {
-        minSdkVersion 16
-        targetSdkVersion rootProject.ext.target_sdk_version
-        versionCode rootProject.ext.version_code
-        versionName rootProject.ext.version_name
+        minSdkVersion sdk_min_version
+        targetSdkVersion sdk_compile_version
+        versionCode version_code
+        versionName version_name
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
