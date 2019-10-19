@@ -31,7 +31,7 @@ dependencies {
     //compile 'com.github.Gokuldroid.Lily:lilypref:master-SNAPSHOT'
     //compile 'com.github.Gokuldroid.Lily:lilytoast:master-SNAPSHOT'
     implementation project(':lilycore')
-    implementation project(':lilypref')
+    implementation project(':remote')
     implementation project(':retrofit')
     implementation project(':lilyadapter')
 }

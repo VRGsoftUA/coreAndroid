@@ -1,1 +1,1 @@
-include ':app', ':lilycore', ':lilypref', ':retrofit', ':lilyadapter'
+include ':app', ':lilycore', ':remote', ':retrofit', ':lilyadapter'

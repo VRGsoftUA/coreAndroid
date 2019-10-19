@@ -26,13 +26,10 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestImplementation(Libs.espresso_core)
-    implementation Libs.appcompat
-    testImplementation Libs.junit
-    implementation Libs.kotlin_stdlib_jdk7
-    implementation Libs.kotlin_reflect
-    //implementation 'com.github.Gokuldroid.Lily:lilycore:master-SNAPSHOT'
-    implementation project(':lilycore')
+
+    rootProject.coreRemote.each {
+        add(it.configuration, it.dependency, it.options)
+    }
 }
 repositories {
     mavenCentral()
