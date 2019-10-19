@@ -5,10 +5,10 @@ android {
     compileSdkVersion sdk_compile_version
     defaultConfig {
         applicationId "com.vrgsoft.example"
-        minSdkVersion 16
+        minSdkVersion sdk_min_version
         targetSdkVersion sdk_compile_version
-        versionCode 1
-        versionName "1.0"
+        versionCode version_code
+        versionName version_name
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -21,15 +21,9 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestImplementation(Libs.espresso_core)
-    implementation Libs.appcompat
-    implementation Libs.constraintlayout
-    implementation Libs.material
-    testImplementation Libs.junit
-    implementation Libs.kotlin_stdlib_jdk7
-    //compile 'com.github.Gokuldroid.Lily:lilycore:master-SNAPSHOT'
-    //compile 'com.github.Gokuldroid.Lily:lilypref:master-SNAPSHOT'
-    //compile 'com.github.Gokuldroid.Lily:lilytoast:master-SNAPSHOT'
+
+    implementation "androidx.lifecycle:lifecycle-runtime:$lifecycle_version"
+
     implementation project(':lilycore')
     implementation project(':remote')
     implementation project(':retrofit')

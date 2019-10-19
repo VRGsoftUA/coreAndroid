@@ -27,11 +27,6 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestImplementation(Libs.espresso_core)
-    annotationProcessor Libs.lifecycle_compiler
-    implementation Libs.appcompat
-    testImplementation Libs.junit
-    implementation Libs.kotlin_stdlib_jdk7
 }
 repositories {
     mavenCentral()

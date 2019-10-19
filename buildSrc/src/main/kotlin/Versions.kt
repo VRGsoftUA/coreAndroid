@@ -14,30 +14,6 @@ import org.gradle.plugin.use.PluginDependencySpec
 object Versions {
     const val de_fayard_buildsrcversions_gradle_plugin: String = "0.6.4"
 
-    const val com_android_tools_build_gradle: String = "3.5.1"
-
-    const val android_maven_gradle_plugin: String = "2.1"
-
-    const val org_jetbrains_kotlin: String = "1.3.50"
-
-    const val lifecycle_compiler: String = "2.1.0"
-
-    const val constraintlayout: String = "1.1.3"
-
-    const val espresso_core: String = "3.2.0"
-
-    const val recyclerview: String = "1.0.0"
-
-    const val lint_gradle: String = "26.5.1"
-
-    const val appcompat: String = "1.1.0"
-
-    const val cardview: String = "1.0.0"
-
-    const val material: String = "1.1.0-alpha06"
-
-    const val junit: String = "4.12"
-
     /**
      * Current version: "5.1.1"
      * See issue 19: How to update Gradle itself?
