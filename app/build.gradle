@@ -1,34 +1,40 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion 29
-    buildToolsVersion "29.0.2"
-
-
+    compileSdkVersion rootProject.ext.target_sdk_version
     defaultConfig {
-        applicationId "com.vrgsoft.app"
-        minSdkVersion 21
-        targetSdkVersion 29
+        applicationId "com.vrgsoft.example"
+        minSdkVersion 16
+        targetSdkVersion rootProject.ext.target_sdk_version
         versionCode 1
         versionName "1.0"
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
     }
-
     buildTypes {
-       release {
-           minifyEnabled false
-           proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-       }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
     }
-
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-
-    implementation project(':retrofit')
-    implementation project(':remote')
-
+    androidTestImplementation(Libs.espresso_core)
+    implementation Libs.appcompat
+    implementation Libs.constraintlayout
+    implementation Libs.material
+    testImplementation Libs.junit
+    implementation Libs.kotlin_stdlib_jdk7
+    //compile 'com.github.Gokuldroid.Lily:lilycore:master-SNAPSHOT'
+    //compile 'com.github.Gokuldroid.Lily:lilypref:master-SNAPSHOT'
+    //compile 'com.github.Gokuldroid.Lily:lilytoast:master-SNAPSHOT'
+    implementation project(':lilycore')
+    implementation project(':lilypref')
+    implementation project(':lilytoast')
+    implementation project(':lilyadapter')
+}
+repositories {
+    mavenCentral()
 }

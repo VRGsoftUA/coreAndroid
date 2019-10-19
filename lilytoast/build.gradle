@@ -1,0 +1,42 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'com.github.dcendents.android-maven'
+
+group='com.github.VRGsoftUA'
+
+android {
+    compileSdkVersion rootProject.ext.complie_sdk_version
+
+    defaultConfig {
+        minSdkVersion 16
+        targetSdkVersion rootProject.ext.target_sdk_version
+        versionCode rootProject.ext.version_code
+        versionName rootProject.ext.version_name
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestImplementation(Libs.espresso_core)
+    implementation Libs.appcompat
+    implementation Libs.cardview
+    implementation Libs.material
+
+    testImplementation Libs.junit
+    implementation Libs.kotlin_stdlib_jdk7
+    implementation Libs.kotlin_reflect
+//    implementation 'com.github.Gokuldroid.Lily:lilycore:master-SNAPSHOT'
+    implementation project(':lilycore')
+}
+repositories {
+    mavenCentral()
+}

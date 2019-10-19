@@ -1,0 +1,13 @@
+*.iml
+.gradle
+/local.properties
+/.idea/workspace.xml
+/.idea/libraries
+/.idea/caches
+
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+/commit.bat
+/app/src/main/java/me/tuple/lily/example/DemoFragment.kt
