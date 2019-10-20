@@ -10,6 +10,7 @@ android {
         versionCode version_code
         versionName version_name
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -22,9 +23,6 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation "androidx.lifecycle:lifecycle-runtime:$lifecycle_version"
-
-    implementation project(':lilycore')
     implementation project(':remote')
     implementation project(':retrofit')
     implementation project(':networkmanager')

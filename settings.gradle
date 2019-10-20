@@ -1,1 +1,1 @@
-include ':app', ':lilycore', ':remote', ':retrofit', ':networkmanager', ':presentation'
+include ':app', ':remote', ':retrofit', ':networkmanager', ':presentation'
