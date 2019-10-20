@@ -1,1 +1,1 @@
-include ':app', ':remote', ':retrofit', ':networkmanager', ':presentation'
+include ':app', ':remote', ':retrofit', ':networkmanager', ':presentation', ':gateway'

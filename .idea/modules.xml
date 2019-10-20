@@ -6,6 +6,7 @@
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/buildSrc/buildSrc.iml" filepath="$PROJECT_DIR$/buildSrc/buildSrc.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/coreAndroid.iml" filepath="$PROJECT_DIR$/.idea/coreAndroid.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gateway/gateway.iml" filepath="$PROJECT_DIR$/gateway/gateway.iml" />
       <module fileurl="file://$PROJECT_DIR$/lilyadapter/lilyadapter.iml" filepath="$PROJECT_DIR$/lilyadapter/lilyadapter.iml" />
       <module fileurl="file://$PROJECT_DIR$/lilypref/lilypref.iml" filepath="$PROJECT_DIR$/lilypref/lilypref.iml" />
       <module fileurl="file://$PROJECT_DIR$/lilytoast/lilytoast.iml" filepath="$PROJECT_DIR$/lilytoast/lilytoast.iml" />
