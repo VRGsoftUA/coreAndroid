@@ -37,7 +37,7 @@ object RetrofitModule {
 
             builder.cache(instance())
 
-            if (BuildConfig.DEBUG) {
+            if (RetrofitConfig.enableLogging) {
                 val loggingInterceptor = HttpLoggingInterceptor()
                 loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
                 builder.addInterceptor(loggingInterceptor)
