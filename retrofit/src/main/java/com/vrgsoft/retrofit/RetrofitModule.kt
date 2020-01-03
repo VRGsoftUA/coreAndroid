@@ -45,7 +45,13 @@ object RetrofitModule {
 
             builder.connectTimeout(100, TimeUnit.SECONDS)
             builder.retryOnConnectionFailure(true)
-            builder.addInterceptor(instance<AuthInterceptor>())
+
+            if (RetrofitConfig.useCustomAuthInterceptor) {
+                builder.addInterceptor(RetrofitConfig.customAuthInterceptor)
+            } else {
+                builder.addInterceptor(instance<AuthInterceptor>())
+            }
+
             builder.addInterceptor(HeaderInterceptor())
             builder.build()
         }
