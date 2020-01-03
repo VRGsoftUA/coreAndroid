@@ -43,7 +43,6 @@ abstract class BaseFragment<B : ViewDataBinding> : Fragment(), KodeinAware {
     //endregion
 
     protected lateinit var binding: B
-    private var initialized = false
 
     //region lifecycle
 
@@ -53,11 +52,7 @@ abstract class BaseFragment<B : ViewDataBinding> : Fragment(), KodeinAware {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        setHasOptionsMenu(true)
-        if (!initialized) {
-            binding = DataBindingUtil.inflate(inflater, getLayoutRes(), container, false)
-            initialized = true
-        }
+        binding = DataBindingUtil.inflate(inflater, getLayoutRes(), container, false)
         return binding.root
     }
 
@@ -65,7 +60,7 @@ abstract class BaseFragment<B : ViewDataBinding> : Fragment(), KodeinAware {
         super.onViewCreated(view, savedInstanceState)
 
         binding.apply {
-            setLifecycleOwner(this@BaseFragment)
+            lifecycleOwner = this@BaseFragment
         }
 
         viewCreated(savedInstanceState)
@@ -109,9 +104,8 @@ abstract class BaseFragment<B : ViewDataBinding> : Fragment(), KodeinAware {
 
     //region utils
 
-    inline fun <reified VM : BaseViewModelImpl> vm(factory: ViewModelProvider.Factory): VM {
-        return ViewModelProviders.of(this, factory)[VM::class.java]
-    }
+    inline fun <reified VM : BaseViewModelImpl> vm(factory: ViewModelProvider.Factory): VM =
+        ViewModelProviders.of(this, factory)[VM::class.java]
 
     //endregion
 }
