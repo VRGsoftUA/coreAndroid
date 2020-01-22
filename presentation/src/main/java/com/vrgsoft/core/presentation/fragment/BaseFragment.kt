@@ -10,6 +10,9 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.KodeinTrigger
@@ -18,6 +21,11 @@ import org.kodein.di.simpleErasedName
 import java.lang.reflect.ParameterizedType
 
 abstract class BaseFragment<B : ViewDataBinding> : Fragment(), KodeinAware {
+
+    private val mainJob = Job()
+
+    protected val mainScope = CoroutineScope(Dispatchers.Main + mainJob)
+
     //region Kodein
 
     private val _parentKodein: Kodein by closestKodein()
@@ -64,6 +72,11 @@ abstract class BaseFragment<B : ViewDataBinding> : Fragment(), KodeinAware {
         }
 
         viewCreated(savedInstanceState)
+    }
+
+    override fun onStop() {
+        mainJob.cancel()
+        super.onStop()
     }
 
     //endregion
