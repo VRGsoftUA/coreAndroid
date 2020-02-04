@@ -67,9 +67,8 @@ abstract class BaseFragment<B : ViewDataBinding> : Fragment(), KodeinAware {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.apply {
-            lifecycleOwner = this@BaseFragment
-        }
+        binding.lifecycleOwner = this
+        lifecycle.addObserver(viewModel)
 
         viewCreated(savedInstanceState)
     }
