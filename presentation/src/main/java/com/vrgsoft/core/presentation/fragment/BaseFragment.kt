@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.VisibleForTesting
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
@@ -41,7 +42,8 @@ abstract class BaseFragment<B : ViewDataBinding> : Fragment(), KodeinAware {
             }
         }
 
-    protected lateinit var binding: B
+    @VisibleForTesting(otherwise = VisibleForTesting.PROTECTED)
+    lateinit var binding: B
 
     private var diEnabled = true
 
