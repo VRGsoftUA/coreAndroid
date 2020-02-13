@@ -3,11 +3,11 @@ package com.vrgsoft.core.presentation.router
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import com.vrgsoft.core.presentation.fragment.BaseFragment
+import com.vrgsoft.core.presentation.fragment.IBaseRouter
 import com.vrgsoft.core.presentation.fragment.argumented.Argumented
 import com.vrgsoft.core.presentation.fragment.argumented.ArgumentedFragment
 import com.vrgsoft.core.presentation.fragment.argumented.BaseArguments
-import com.vrgsoft.core.presentation.fragment.BaseFragment
-import com.vrgsoft.core.presentation.fragment.IBaseRouter
 
 abstract class FragmentRouter(
     protected val manager: FragmentManager
@@ -60,7 +60,9 @@ abstract class FragmentRouter(
         return instance
     }
 
-    protected inline fun <A : BaseArguments, reified T : Argumented<A>> createArgumentedInstance(args: BaseArguments): T {
+    protected inline fun <A : BaseArguments, reified T : Argumented<A>> createArgumentedInstance(
+        args: BaseArguments
+    ): T {
         val instance = T::class.constructors.first().call()
 
         (instance as Fragment).arguments = Bundle().apply {
