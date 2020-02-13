@@ -43,6 +43,8 @@ abstract class BaseFragment<B : ViewDataBinding> : Fragment(), KodeinAware {
 
     protected lateinit var binding: B
 
+    private var diEnabled = true
+
     //endregion
 
     //region Kodein
@@ -72,7 +74,9 @@ abstract class BaseFragment<B : ViewDataBinding> : Fragment(), KodeinAware {
     //region lifecycle
 
     override fun onAttach(context: Context) {
-        kodeinTrigger.trigger()
+        if (diEnabled) {
+            kodeinTrigger.trigger()
+        }
         super.onAttach(context)
     }
 
@@ -145,8 +149,9 @@ abstract class BaseFragment<B : ViewDataBinding> : Fragment(), KodeinAware {
     //region test methods
 
     @TestOnly
-    fun prepareForTest() {
+    fun prepareForTest(disableDi: Boolean = false) {
         test = true
+        diEnabled = !disableDi
     }
 
     //endregion
