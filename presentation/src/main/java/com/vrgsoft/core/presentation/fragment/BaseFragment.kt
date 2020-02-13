@@ -10,9 +10,11 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
+import com.vrgsoft.core.presentation.R
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import org.jetbrains.annotations.TestOnly
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.KodeinTrigger
@@ -22,9 +24,27 @@ import java.lang.reflect.ParameterizedType
 
 abstract class BaseFragment<B : ViewDataBinding> : Fragment(), KodeinAware {
 
+    //region fields
+
+    private var test: Boolean = false
+
     private val mainJob = Job()
 
-    protected val mainScope = CoroutineScope(Dispatchers.Main + mainJob)
+    private val defaultScope = CoroutineScope(Dispatchers.Main)
+    private val fragmentScope = CoroutineScope(Dispatchers.Main + mainJob)
+
+    protected val mainScope: CoroutineScope
+        get() {
+            return if (test) {
+                defaultScope
+            } else {
+                fragmentScope
+            }
+        }
+
+    protected lateinit var binding: B
+
+    //endregion
 
     //region Kodein
 
@@ -50,8 +70,6 @@ abstract class BaseFragment<B : ViewDataBinding> : Fragment(), KodeinAware {
 
     //endregion
 
-    protected lateinit var binding: B
-
     //region lifecycle
 
     override fun onAttach(context: Context) {
@@ -59,7 +77,11 @@ abstract class BaseFragment<B : ViewDataBinding> : Fragment(), KodeinAware {
         super.onAttach(context)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         binding = DataBindingUtil.inflate(inflater, getLayoutRes(), container, false)
         return binding.root
     }
@@ -118,6 +140,15 @@ abstract class BaseFragment<B : ViewDataBinding> : Fragment(), KodeinAware {
 
     inline fun <reified VM : BaseViewModelImpl> vm(factory: ViewModelProvider.Factory): VM =
         ViewModelProviders.of(this, factory)[VM::class.java]
+
+    //endregion
+
+    //region test methods
+
+    @TestOnly
+    fun prepareForTest() {
+        test = true
+    }
 
     //endregion
 }
