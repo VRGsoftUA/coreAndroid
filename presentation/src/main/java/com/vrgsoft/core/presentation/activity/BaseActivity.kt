@@ -1,5 +1,6 @@
 package com.vrgsoft.core.presentation.activity
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.annotation.Nullable
@@ -8,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.vrgsoft.core.presentation.fragment.BaseViewModelImpl
+import com.vrgsoft.core.utils.LocaleManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -48,6 +50,10 @@ abstract class BaseActivity : AppCompatActivity(), KodeinAware {
     private var fragmentContainer: Int? = null
 
     //endregion
+
+    override fun attachBaseContext(newBase: Context?) {
+        super.attachBaseContext(LocaleManager.setLocale(newBase!!))
+    }
 
     override fun onCreate(@Nullable savedInstanceState: Bundle?) {
         kodeinTrigger.trigger()
