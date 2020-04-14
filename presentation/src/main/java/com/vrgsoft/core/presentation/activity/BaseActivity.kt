@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.vrgsoft.core.presentation.fragment.BaseViewModelImpl
 import com.vrgsoft.core.utils.LocaleManager
+import com.vrgsoft.core.utils.MyContextWrapper
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -52,7 +53,9 @@ abstract class BaseActivity : AppCompatActivity(), KodeinAware {
     //endregion
 
     override fun attachBaseContext(newBase: Context?) {
-        super.attachBaseContext(LocaleManager.setLocale(newBase!!))
+        val context = MyContextWrapper.wrap(newBase, LocaleManager.language)
+
+        super.attachBaseContext(context)
     }
 
     override fun onCreate(@Nullable savedInstanceState: Bundle?) {
