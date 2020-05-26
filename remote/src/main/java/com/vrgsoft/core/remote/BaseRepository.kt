@@ -11,7 +11,7 @@ import retrofit2.Response
 
 abstract class BaseRepository {
     @VisibleForTesting(otherwise = VisibleForTesting.PROTECTED)
-    suspend fun <T> execute(call: (() -> Deferred<Response<T>>)): BaseResult<T> {
+    open suspend fun <T> execute(call: (() -> Deferred<Response<T>>)): BaseResult<T> {
         try {
             val result = call.invoke().await()
 
