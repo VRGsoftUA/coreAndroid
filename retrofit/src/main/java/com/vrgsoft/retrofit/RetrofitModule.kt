@@ -37,7 +37,12 @@ object RetrofitModule {
 
             builder.cache(instance())
 
-            builder.connectTimeout(100, TimeUnit.SECONDS)
+            RetrofitConfig.okHttpConfig?.timeout?.let {
+                builder.connectTimeout(it.time, it.timeUnit)
+            } ?: run {
+                builder.connectTimeout(100, TimeUnit.SECONDS)
+            }
+
             builder.retryOnConnectionFailure(true)
 
             if (RetrofitConfig.useCustomAuthInterceptor) {
