@@ -15,8 +15,8 @@ class LayoutResProcessor(
     fun getLayoutRes(): Int {
         while (superClassGeneric !is ParameterizedType) {
             if (superClass != null) {
-                superClassGeneric = superClass.genericSuperclass
-                superClass = superClass.superclass
+                superClassGeneric = superClass?.genericSuperclass
+                superClass = superClass?.superclass
             } else {
                 throw Exception("maybe something with BaseFragment?")
             }
