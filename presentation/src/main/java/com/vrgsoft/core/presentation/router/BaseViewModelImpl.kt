@@ -1,12 +1,14 @@
-package com.vrgsoft.core.presentation.fragment
+package com.vrgsoft.core.presentation.router
 
 import androidx.lifecycle.ViewModel
+import com.vrgsoft.core.presentation.fragment.BaseViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import org.jetbrains.annotations.TestOnly
 
-abstract class BaseViewModelImpl : ViewModel(), BaseViewModel {
+abstract class BaseViewModelImpl : ViewModel(),
+    BaseViewModel {
 
     private var test: Boolean = false
 

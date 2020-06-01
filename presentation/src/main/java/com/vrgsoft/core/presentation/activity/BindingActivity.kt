@@ -5,22 +5,38 @@ import android.view.LayoutInflater
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import com.vrgsoft.core.presentation.common.LayoutResProcessor
 import com.vrgsoft.core.presentation.fragment.BaseViewModel
 
 abstract class BindingActivity<B : ViewDataBinding> : BaseActivity() {
-    protected lateinit var binding: B
+
+    private lateinit var _binding: B
+    protected val binding: B
+        get() = _binding
     abstract val viewModel: BaseViewModel
 
+    private val layoutResProcessor: LayoutResProcessor by lazy {
+        LayoutResProcessor(
+            context = this@BindingActivity,
+            superClass = this.javaClass.superclass,
+            superClassGeneric = this.javaClass.genericSuperclass
+        )
+    }
+
+    /**
+     * Retrieves a resource from a fragment class,
+     * You can override to specify a resource manually
+     */
     @LayoutRes
-    abstract fun getLayoutRes(): Int
+    open fun getLayoutRes(): Int = layoutResProcessor.getLayoutRes()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.inflate(LayoutInflater.from(this), getLayoutRes(), null, false)
-        binding.setLifecycleOwner(this)
+        _binding = DataBindingUtil.inflate(LayoutInflater.from(this), getLayoutRes(), null, false)
+        _binding.lifecycleOwner = this
 
         lifecycle.addObserver(viewModel)
 
-        setContentView(binding.root)
+        setContentView(_binding.root)
     }
 }

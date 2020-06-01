@@ -5,12 +5,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.VisibleForTesting
+import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
+import com.vrgsoft.core.presentation.common.LayoutResProcessor
+import com.vrgsoft.core.presentation.router.BaseViewModelImpl
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -19,8 +21,6 @@ import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.KodeinTrigger
 import org.kodein.di.android.closestKodein
-import org.kodein.di.simpleErasedName
-import java.lang.reflect.ParameterizedType
 
 abstract class BaseFragment<B : ViewDataBinding> : Fragment(), KodeinAware {
 
@@ -31,7 +31,7 @@ abstract class BaseFragment<B : ViewDataBinding> : Fragment(), KodeinAware {
     private val mainJob = Job()
 
     private val defaultScope = CoroutineScope(Dispatchers.Main)
-    private val fragmentScope = CoroutineScope(Dispatchers.Main + mainJob)
+    private val fragmentScope = CoroutineScope(Dispatchers.IO + mainJob)
 
     protected val mainScope: CoroutineScope
         get() {
@@ -42,10 +42,19 @@ abstract class BaseFragment<B : ViewDataBinding> : Fragment(), KodeinAware {
             }
         }
 
-    @VisibleForTesting(otherwise = VisibleForTesting.PROTECTED)
-    lateinit var binding: B
+    private lateinit var _binding: B
+    protected val binding: B
+        get() = _binding
 
     private var diEnabled = true
+
+    private val layoutResProcessor: LayoutResProcessor by lazy {
+        LayoutResProcessor(
+            context = requireContext(),
+            superClass = this.javaClass.superclass,
+            superClassGeneric = this.javaClass.genericSuperclass
+        )
+    }
 
     //endregion
 
@@ -87,14 +96,14 @@ abstract class BaseFragment<B : ViewDataBinding> : Fragment(), KodeinAware {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(inflater, getLayoutRes(), container, false)
-        return binding.root
+        _binding = DataBindingUtil.inflate(inflater, getLayoutRes(), container, false)
+        return _binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.lifecycleOwner = this
+        _binding.lifecycleOwner = this
         lifecycle.addObserver(viewModel)
 
         viewCreated(savedInstanceState)
@@ -113,33 +122,12 @@ abstract class BaseFragment<B : ViewDataBinding> : Fragment(), KodeinAware {
 
     //endregion
 
-    //region private methods
-
-    open fun getLayoutRes(): Int {
-        var superClassGeneric = this.javaClass.genericSuperclass
-        var superClass = this.javaClass.superclass
-
-        while (superClassGeneric !is ParameterizedType) {
-            if (superClass != null) {
-                superClassGeneric = superClass.genericSuperclass
-                superClass = superClass.superclass
-            } else {
-                throw Exception("maybe something with BaseFragment?")
-            }
-        }
-
-        val fragmentLayoutName = superClassGeneric.actualTypeArguments[0]
-            .simpleErasedName()
-            .replace("Binding", "")
-            .split("(?<=[a-z])(?=[A-Z])|(?<=[A-Z])(?=[A-Z][a-z])".toRegex())
-            .joinToString(separator = "_")
-            .toLowerCase()
-
-        val resourceName = "${context?.applicationContext?.packageName}:layout/$fragmentLayoutName"
-        return resources.getIdentifier(resourceName, null, null)
-    }
-
-    //endregion
+    /**
+     * Retrieves a resource from a fragment class,
+     * You can override to specify a resource manually
+     */
+    @LayoutRes
+    open fun getLayoutRes(): Int = layoutResProcessor.getLayoutRes()
 
     //region utils
 
