@@ -12,7 +12,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.vrgsoft.core.presentation.common.LayoutResProcessor
-import com.vrgsoft.core.presentation.router.BaseViewModelImpl
+import com.vrgsoft.core.presentation.viewModel.BaseViewModel
+import com.vrgsoft.core.presentation.viewModel.BaseViewModelImpl
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job

@@ -1,7 +1,6 @@
-package com.vrgsoft.core.presentation.router
+package com.vrgsoft.core.presentation.viewModel
 
 import androidx.lifecycle.ViewModel
-import com.vrgsoft.core.presentation.fragment.BaseViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job

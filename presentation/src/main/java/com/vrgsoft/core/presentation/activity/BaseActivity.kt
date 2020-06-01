@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
-import com.vrgsoft.core.presentation.router.BaseViewModelImpl
+import com.vrgsoft.core.presentation.viewModel.BaseViewModelImpl
 import com.vrgsoft.core.utils.LocaleManager
 import com.vrgsoft.core.utils.MyContextWrapper
 import kotlinx.coroutines.CoroutineScope

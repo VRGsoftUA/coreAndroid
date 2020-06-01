@@ -6,7 +6,7 @@ import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import com.vrgsoft.core.presentation.common.LayoutResProcessor
-import com.vrgsoft.core.presentation.fragment.BaseViewModel
+import com.vrgsoft.core.presentation.viewModel.BaseViewModel
 
 abstract class BindingActivity<B : ViewDataBinding> : BaseActivity() {
 

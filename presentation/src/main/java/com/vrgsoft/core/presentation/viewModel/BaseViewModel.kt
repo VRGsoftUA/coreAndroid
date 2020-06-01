@@ -1,4 +1,4 @@
-package com.vrgsoft.core.presentation.fragment
+package com.vrgsoft.core.presentation.viewModel
 
 import androidx.lifecycle.LifecycleObserver
 
