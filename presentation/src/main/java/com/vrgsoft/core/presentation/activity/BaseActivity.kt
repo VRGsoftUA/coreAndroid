@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
+import com.vrgsoft.core.presentation.common.AppConfigurator
 import com.vrgsoft.core.presentation.viewModel.BaseViewModelImpl
 import com.vrgsoft.core.utils.LocaleManager
 import com.vrgsoft.core.utils.MyContextWrapper
@@ -59,6 +60,9 @@ abstract class BaseActivity : AppCompatActivity(), KodeinAware {
     }
 
     override fun onCreate(@Nullable savedInstanceState: Bundle?) {
+        AppConfigurator.customTheme?.let {
+            setTheme(it)
+        }
         kodeinTrigger.trigger()
         super.onCreate(savedInstanceState)
     }
