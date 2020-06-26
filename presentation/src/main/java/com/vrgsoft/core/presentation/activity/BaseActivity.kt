@@ -45,7 +45,7 @@ abstract class BaseActivity : AppCompatActivity(), KodeinAware {
     private val _parentKodein by closestKodein()
     override val kodein: Kodein by retainedKodein {
         extend(_parentKodein)
-        import(diModule())
+        import(diModule(), allowOverride = true)
     }
     override val kodeinTrigger = KodeinTrigger()
 
