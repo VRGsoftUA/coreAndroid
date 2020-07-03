@@ -21,7 +21,7 @@ class ActivityResultProcessor {
     private class RequestData<T : Any>(
         val requestCode: Int,
         private val handler: (T) -> Unit,
-        private val onCancel: () -> Unit = {},
+        private val onCancel: () -> Unit,
         private val getExtra: (Intent) -> T
     ) {
         fun handle(data: Intent) {
@@ -42,13 +42,19 @@ class ActivityResultProcessor {
      * @param extraKey key for intent extra from [Activity.onActivityResult]
      * @param handler handler for data received from intent
      */
-    fun handleLongData(requestCode: Int, extraKey: String, handler: (Long) -> Unit) {
+    fun handleLongData(
+        requestCode: Int,
+        extraKey: String,
+        handler: (Long) -> Unit,
+        onCancel: () -> Unit = {}
+    ) {
         RequestData(
             requestCode = requestCode,
             handler = handler,
             getExtra = {
                 it.getLongExtra(extraKey, -1L)
-            }
+            },
+            onCancel = onCancel
         ).let {
             dataHandlers = dataHandlers + it
         }
@@ -61,13 +67,19 @@ class ActivityResultProcessor {
      * @param extraKey key for intent extra from [Activity.onActivityResult]
      * @param handler handler for data received from intent
      */
-    fun handleStringData(requestCode: Int, extraKey: String, handler: (String) -> Unit) {
+    fun handleStringData(
+        requestCode: Int,
+        extraKey: String,
+        handler: (String) -> Unit,
+        onCancel: () -> Unit = {}
+    ) {
         RequestData(
             requestCode = requestCode,
             handler = handler,
             getExtra = {
                 it.getStringExtra(extraKey).orEmpty()
-            }
+            },
+            onCancel = onCancel
         ).let {
             dataHandlers = dataHandlers + it
         }
@@ -83,14 +95,16 @@ class ActivityResultProcessor {
     fun <T : Parcelable> handleParcelableData(
         requestCode: Int,
         extraKey: String,
-        handler: (T) -> Unit
+        handler: (T) -> Unit,
+        onCancel: () -> Unit = {}
     ) {
         RequestData(
             requestCode = requestCode,
             handler = handler,
             getExtra = {
                 it.getParcelableExtra<T>(extraKey)
-            }
+            },
+            onCancel = onCancel
         ).let {
             dataHandlers = dataHandlers + it
         }
@@ -101,7 +115,11 @@ class ActivityResultProcessor {
      *
      * @throws IllegalArgumentException if result code is not [Activity.RESULT_OK] or [Activity.RESULT_CANCELED]
      */
-    fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    fun onActivityResult(
+        requestCode: Int,
+        resultCode: Int,
+        data: Intent?
+    ) {
         when (resultCode) {
             Activity.RESULT_OK -> handleResultOk(requestCode, data)
             Activity.RESULT_CANCELED -> handleResultCanceled(requestCode)
