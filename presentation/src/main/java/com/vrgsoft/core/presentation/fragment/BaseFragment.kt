@@ -1,6 +1,7 @@
 package com.vrgsoft.core.presentation.fragment
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +15,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.vrgsoft.core.presentation.common.LayoutResProcessor
 import com.vrgsoft.core.presentation.viewModel.BaseViewModel
 import com.vrgsoft.core.presentation.viewModel.BaseViewModelImpl
+import com.vrgsoft.core.utils.ActivityResultProcessor
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -22,6 +24,7 @@ import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.KodeinTrigger
 import org.kodein.di.android.closestKodein
+import org.kodein.di.generic.instance
 
 abstract class BaseFragment<B : ViewDataBinding> : Fragment(), KodeinAware {
 
@@ -56,6 +59,8 @@ abstract class BaseFragment<B : ViewDataBinding> : Fragment(), KodeinAware {
             superClassGeneric = this.javaClass.genericSuperclass
         )
     }
+
+    private val resultProcessor: ActivityResultProcessor by instance()
 
     //endregion
 
@@ -113,6 +118,11 @@ abstract class BaseFragment<B : ViewDataBinding> : Fragment(), KodeinAware {
     override fun onStop() {
         mainJob.cancel()
         super.onStop()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        resultProcessor.onActivityResult(requestCode, resultCode, data)
     }
 
     //endregion

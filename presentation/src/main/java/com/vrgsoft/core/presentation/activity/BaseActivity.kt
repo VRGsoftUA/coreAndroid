@@ -1,6 +1,7 @@
 package com.vrgsoft.core.presentation.activity
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.annotation.Nullable
@@ -10,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.vrgsoft.core.presentation.common.AppConfigurator
 import com.vrgsoft.core.presentation.viewModel.BaseViewModelImpl
+import com.vrgsoft.core.utils.ActivityResultProcessor
 import com.vrgsoft.core.utils.LocaleManager
 import com.vrgsoft.core.utils.MyContextWrapper
 import kotlinx.coroutines.CoroutineScope
@@ -21,6 +23,7 @@ import org.kodein.di.KodeinAware
 import org.kodein.di.KodeinTrigger
 import org.kodein.di.android.closestKodein
 import org.kodein.di.android.retainedKodein
+import org.kodein.di.generic.instance
 
 abstract class BaseActivity : AppCompatActivity(), KodeinAware {
 
@@ -51,6 +54,8 @@ abstract class BaseActivity : AppCompatActivity(), KodeinAware {
 
     private var fragmentContainer: Int? = null
 
+    private val resultProcessor: ActivityResultProcessor by instance()
+
     //endregion
 
     override fun attachBaseContext(newBase: Context?) {
@@ -70,6 +75,11 @@ abstract class BaseActivity : AppCompatActivity(), KodeinAware {
     override fun onStop() {
         mainJob.cancel()
         super.onStop()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        resultProcessor.onActivityResult(requestCode, resultCode, data)
     }
 
     abstract fun diModule(): Kodein.Module
