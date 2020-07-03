@@ -144,6 +144,7 @@ class ActivityResultProcessor {
             it.requestCode == requestCode
         }.forEach {
             it.handle(data)
+            dataHandlers = dataHandlers.minus(it)
         }
     }
 
@@ -157,6 +158,7 @@ class ActivityResultProcessor {
             it.requestCode == requestCode
         }.forEach {
             it.sendCancelEvent()
+            dataHandlers = dataHandlers.minus(it)
         }
     }
 }
