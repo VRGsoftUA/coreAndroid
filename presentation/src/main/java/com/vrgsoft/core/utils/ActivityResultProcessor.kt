@@ -12,7 +12,7 @@ import android.os.Parcelable
  * For processing [Activity.RESULT_OK] set the handler for specified request code and extra key
  * using [handleLongData] for extra data with type [Long]
  */
-class ActivityResultProcessor {
+internal class ActivityResultProcessor {
 
     /**
      * Class containing data about intent extra that needs to be

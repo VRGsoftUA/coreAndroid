@@ -54,7 +54,7 @@ abstract class BaseActivity : AppCompatActivity(), KodeinAware {
 
     private var fragmentContainer: Int? = null
 
-    private val resultProcessor: ActivityResultProcessor by instance()
+    internal val resultProcessor: ActivityResultProcessor by instance()
 
     //endregion
 
