@@ -48,8 +48,15 @@ abstract class BaseActivity : AppCompatActivity(), KodeinAware {
     private val _parentKodein by closestKodein()
     override val kodein: Kodein by retainedKodein {
         extend(_parentKodein)
-        import(diModule(), allowOverride = true)
+        import(kodeinModule, true)
+        import(viewModelModule, true)
+        import(routerModule, true)
     }
+
+    open val kodeinModule: Kodein.Module = Kodein.Module("default") {}
+    open val viewModelModule: Kodein.Module = Kodein.Module("BaseActivity.ViewModel") {}
+    open val routerModule: Kodein.Module = Kodein.Module("BaseActivity.Router") {}
+
     override val kodeinTrigger = KodeinTrigger()
 
     private var fragmentContainer: Int? = null
@@ -81,8 +88,6 @@ abstract class BaseActivity : AppCompatActivity(), KodeinAware {
         super.onActivityResult(requestCode, resultCode, data)
         resultProcessor.onActivityResult(requestCode, resultCode, data)
     }
-
-    abstract fun diModule(): Kodein.Module
 
     protected fun View.setAsDefaultBackPressed() {
         setOnClickListener {
