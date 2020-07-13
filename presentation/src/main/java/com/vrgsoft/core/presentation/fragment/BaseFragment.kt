@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.vrgsoft.core.presentation.common.LayoutResProcessor
+import com.vrgsoft.core.presentation.common.importIfNotNull
 import com.vrgsoft.core.presentation.viewModel.BaseViewModel
 import com.vrgsoft.core.presentation.viewModel.BaseViewModelImpl
 import com.vrgsoft.core.utils.ActivityResultProcessor
@@ -23,7 +24,7 @@ import org.jetbrains.annotations.TestOnly
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.KodeinTrigger
-import org.kodein.di.android.closestKodein
+import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
 
 abstract class BaseFragment<B : ViewDataBinding> : Fragment(), KodeinAware {
@@ -60,13 +61,13 @@ abstract class BaseFragment<B : ViewDataBinding> : Fragment(), KodeinAware {
         )
     }
 
-    private val resultProcessor: ActivityResultProcessor by instance()
+    private val resultProcessor: ActivityResultProcessor by instance<ActivityResultProcessor>()
 
     //endregion
 
     //region Kodein
 
-    private val _parentKodein: Kodein by closestKodein()
+    private val _parentKodein: Kodein by this.closestKodein()
     override val kodein: Kodein = Kodein.lazy {
         extend(_parentKodein, true)
         with(parentFragment) {
@@ -74,13 +75,13 @@ abstract class BaseFragment<B : ViewDataBinding> : Fragment(), KodeinAware {
                 extend(kodein, true)
             }
         }
-        import(viewModelModule, true)
-        import(kodeinModule, true)
+        importIfNotNull(viewModelModule)
+        importIfNotNull(kodeinModule)
     }
 
-    open val kodeinModule: Kodein.Module = Kodein.Module("default") {}
+    open val kodeinModule: Kodein.Module? = null
 
-    open val viewModelModule: Kodein.Module = Kodein.Module("default2") {}
+    open val viewModelModule: Kodein.Module? = null
 
     override val kodeinTrigger = KodeinTrigger()
 

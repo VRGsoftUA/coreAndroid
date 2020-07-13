@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.vrgsoft.core.presentation.common.AppConfigurator
+import com.vrgsoft.core.presentation.common.importIfNotNull
 import com.vrgsoft.core.presentation.viewModel.BaseViewModelImpl
 import com.vrgsoft.core.utils.ActivityResultProcessor
 import com.vrgsoft.core.utils.LocaleManager
@@ -48,20 +49,20 @@ abstract class BaseActivity : AppCompatActivity(), KodeinAware {
     private val _parentKodein by closestKodein()
     override val kodein: Kodein by retainedKodein {
         extend(_parentKodein)
-        import(kodeinModule, true)
-        import(viewModelModule, true)
-        import(routerModule, true)
+        importIfNotNull(kodeinModule)
+        importIfNotNull(viewModelModule)
+        importIfNotNull(routerModule)
     }
 
-    open val kodeinModule: Kodein.Module = Kodein.Module("default") {}
-    open val viewModelModule: Kodein.Module = Kodein.Module("BaseActivity.ViewModel") {}
-    open val routerModule: Kodein.Module = Kodein.Module("BaseActivity.Router") {}
+    open val kodeinModule: Kodein.Module? = null
+    open val viewModelModule: Kodein.Module? = null
+    open val routerModule: Kodein.Module? = null
 
     override val kodeinTrigger = KodeinTrigger()
 
     private var fragmentContainer: Int? = null
 
-    internal val resultProcessor: ActivityResultProcessor by instance()
+    internal val resultProcessor: ActivityResultProcessor by instance<ActivityResultProcessor>()
 
     //endregion
 
