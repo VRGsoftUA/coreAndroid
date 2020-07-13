@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.vrgsoft.core.presentation.common.AppConfigurator
 import com.vrgsoft.core.presentation.common.importIfNotNull
+import com.vrgsoft.core.presentation.router.ActivityRouter
 import com.vrgsoft.core.presentation.viewModel.BaseViewModelImpl
 import com.vrgsoft.core.utils.ActivityResultProcessor
 import com.vrgsoft.core.utils.LocaleManager
@@ -36,6 +37,8 @@ abstract class BaseActivity : AppCompatActivity(), KodeinAware {
 
     private val defaultScope = CoroutineScope(Dispatchers.Main)
     private val activityScope = CoroutineScope(Dispatchers.Main + mainJob)
+
+    protected open val router: ActivityRouter? = null
 
     protected val mainScope: CoroutineScope
         get() {
@@ -80,8 +83,14 @@ abstract class BaseActivity : AppCompatActivity(), KodeinAware {
         super.onCreate(savedInstanceState)
     }
 
+    override fun onStart() {
+        super.onStart()
+        router?.attach(this)
+    }
+
     override fun onStop() {
         mainJob.cancel()
+        router?.detach()
         super.onStop()
     }
 
