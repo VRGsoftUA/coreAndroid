@@ -43,6 +43,31 @@ abstract class ActivityRouter : BaseRouter() {
         activity.finish()
     }
 
+    protected suspend fun Activity.startForRawIntentResultAsync(
+        intent: Intent,
+        requestCode: Int
+    ): Intent{
+        val result = Channel<Intent>()
+
+        resultProcessor.handleRawIntent(
+            requestCode = requestCode,
+            handler = {
+                GlobalScope.launch {
+                    result.send(it)
+                }
+            },
+            onCancel = {
+                GlobalScope.launch {
+                    result.send(intent)
+                }
+            }
+        )
+
+        this.startActivityForResult(intent, requestCode)
+
+        return result.receive()
+    }
+
     protected suspend fun Activity.startForLongResultAsync(
         intent: Intent,
         requestCode: Int,

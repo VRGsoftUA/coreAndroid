@@ -60,6 +60,23 @@ internal class ActivityResultProcessor {
         }
     }
 
+    fun handleRawIntent(
+        requestCode: Int,
+        handler: (Intent) -> Unit,
+        onCancel: () -> Unit = {}
+    ){
+        RequestData(
+            requestCode = requestCode,
+            handler = handler,
+            getExtra = {
+                it
+            },
+            onCancel = onCancel
+        ).let {
+            dataHandlers = dataHandlers + it
+        }
+    }
+
     /**
      * Caches a handler for the result with the specified [requestCode] and [extraKey]
      *
