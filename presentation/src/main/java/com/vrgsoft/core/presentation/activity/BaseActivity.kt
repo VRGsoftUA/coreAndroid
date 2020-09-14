@@ -96,7 +96,12 @@ abstract class BaseActivity : AppCompatActivity(), KodeinAware {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        resultProcessor.onActivityResult(requestCode, resultCode, data)
+
+        try {
+            resultProcessor.onActivityResult(requestCode, resultCode, data)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 
     protected fun View.setAsDefaultBackPressed() {
