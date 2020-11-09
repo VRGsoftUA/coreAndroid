@@ -37,10 +37,20 @@ object RetrofitModule {
 
             builder.cache(instance())
 
-            RetrofitConfig.okHttpConfig?.timeout?.let {
-                builder.connectTimeout(it.time, it.timeUnit)
-            } ?: run {
-                builder.connectTimeout(100, TimeUnit.SECONDS)
+            RetrofitConfig.okHttpConfig?.let {
+                it.connectionTimeout?.let {
+                    builder.connectTimeout(it.time, it.timeUnit)
+                } ?: run {
+                    builder.connectTimeout(100, TimeUnit.SECONDS)
+                }
+
+                it.readTimeout?.let {
+                    builder.readTimeout(it.time, it.timeUnit)
+                }
+
+                it.writeTimeout?.let {
+                    builder.writeTimeout(it.time, it.timeUnit)
+                }
             }
 
             builder.retryOnConnectionFailure(true)
