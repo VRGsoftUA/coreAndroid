@@ -3,7 +3,6 @@ package com.vrgsoft.retrofit
 import android.content.Context
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.vrgsoft.retrofit.common.AuthInterceptor
-import com.vrgsoft.retrofit.common.HeaderInterceptor
 import com.vrgsoft.retrofit.common.RetrofitConfig
 import okhttp3.Cache
 import okhttp3.OkHttpClient
@@ -55,13 +54,12 @@ object RetrofitModule {
 
             builder.retryOnConnectionFailure(true)
 
-            if (RetrofitConfig.useCustomAuthInterceptor) {
-                builder.addInterceptor(RetrofitConfig.customAuthInterceptor)
-            } else {
+            if (RetrofitConfig.useDefaultAuthInterceptor) {
                 builder.addInterceptor(instance<AuthInterceptor>())
             }
-
-            builder.addInterceptor(HeaderInterceptor())
+            RetrofitConfig.customOkHttpConfiguration?.let {
+                it(builder)
+            }
 
             if (RetrofitConfig.enableLogging) {
                 val loggingInterceptor = HttpLoggingInterceptor()
