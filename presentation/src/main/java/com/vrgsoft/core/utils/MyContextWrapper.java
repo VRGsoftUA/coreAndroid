@@ -5,6 +5,8 @@ import android.content.ContextWrapper;
 import android.content.res.Configuration;
 import android.os.Build;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Locale;
 
 public class MyContextWrapper extends ContextWrapper {
@@ -13,7 +15,10 @@ public class MyContextWrapper extends ContextWrapper {
         super(base);
     }
 
-    public static ContextWrapper wrap(Context context, String language) {
+    public static ContextWrapper wrap(
+            @NotNull Context context,
+            @NotNull String language
+    ) {
         Configuration config = context.getResources().getConfiguration();
         if (!language.equals("")) {
             Locale locale = new Locale(language);

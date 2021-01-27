@@ -70,9 +70,13 @@ abstract class BaseActivity : AppCompatActivity(), KodeinAware {
     //endregion
 
     override fun attachBaseContext(newBase: Context?) {
-        val context = MyContextWrapper.wrap(newBase, LocaleManager.language)
-
-        super.attachBaseContext(context)
+        newBase?.let {
+            MyContextWrapper.wrap(it, LocaleManager.language ?: "en")
+        }?.let {
+            super.attachBaseContext(it)
+        } ?: kotlin.run {
+            super.attachBaseContext(newBase)
+        }
     }
 
     override fun onCreate(@Nullable savedInstanceState: Bundle?) {
