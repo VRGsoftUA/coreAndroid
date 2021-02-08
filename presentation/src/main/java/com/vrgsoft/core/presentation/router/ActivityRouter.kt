@@ -4,20 +4,21 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Parcelable
 import androidx.fragment.app.FragmentManager
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.OnLifecycleEvent
 import com.vrgsoft.core.presentation.activity.BaseActivity
 import com.vrgsoft.core.utils.ActivityResultProcessor
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.launch
+import java.lang.ref.WeakReference
 
 abstract class ActivityRouter : BaseRouter() {
 
-    private var _activity: BaseActivity? = null
+    private var _activity: WeakReference<BaseActivity> = initActivity()
     protected val activity: BaseActivity
-        get() = _activity
+        get() = _activity.get()
             ?: throw IllegalStateException("Router is not attach to Activity!")
+
+    private fun initActivity() = WeakReference<BaseActivity>(null)
 
     override val manager: FragmentManager
         get() = activity.supportFragmentManager
@@ -26,17 +27,8 @@ abstract class ActivityRouter : BaseRouter() {
         get() = activity.resultProcessor
 
     fun attach(activity: BaseActivity) {
-        _activity = activity
+        _activity = WeakReference(activity)
         activity.lifecycle.addObserver(this)
-    }
-
-    fun detach() {
-        _activity = null
-    }
-
-    @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
-    fun onStop() {
-        detach()
     }
 
     fun finish() {

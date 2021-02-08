@@ -94,7 +94,6 @@ abstract class BaseActivity : AppCompatActivity(), KodeinAware {
 
     override fun onStop() {
         mainJob.cancel()
-        router?.detach()
         super.onStop()
     }
 
