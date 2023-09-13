@@ -2,18 +2,34 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/Lily.iml" filepath="$PROJECT_DIR$/.idea/Lily.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/buildSrc/buildSrc.iml" filepath="$PROJECT_DIR$/buildSrc/buildSrc.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/coreAndroid.iml" filepath="$PROJECT_DIR$/.idea/coreAndroid.iml" />
-      <module fileurl="file://$PROJECT_DIR$/gateway/gateway.iml" filepath="$PROJECT_DIR$/gateway/gateway.iml" />
-      <module fileurl="file://$PROJECT_DIR$/lilyadapter/lilyadapter.iml" filepath="$PROJECT_DIR$/lilyadapter/lilyadapter.iml" />
-      <module fileurl="file://$PROJECT_DIR$/lilypref/lilypref.iml" filepath="$PROJECT_DIR$/lilypref/lilypref.iml" />
-      <module fileurl="file://$PROJECT_DIR$/lilytoast/lilytoast.iml" filepath="$PROJECT_DIR$/lilytoast/lilytoast.iml" />
-      <module fileurl="file://$PROJECT_DIR$/networkmanager/networkmanager.iml" filepath="$PROJECT_DIR$/networkmanager/networkmanager.iml" />
-      <module fileurl="file://$PROJECT_DIR$/presentation/presentation.iml" filepath="$PROJECT_DIR$/presentation/presentation.iml" />
-      <module fileurl="file://$PROJECT_DIR$/remote/remote.iml" filepath="$PROJECT_DIR$/remote/remote.iml" />
-      <module fileurl="file://$PROJECT_DIR$/retrofit/retrofit.iml" filepath="$PROJECT_DIR$/retrofit/retrofit.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/coreAndroid.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/coreAndroid.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/coreAndroid.app.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/coreAndroid.app.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/coreAndroid.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/coreAndroid.app.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/coreAndroid.app.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/coreAndroid.app.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/coreAndroid.buildSrc.iml" filepath="$PROJECT_DIR$/.idea/modules/coreAndroid.buildSrc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/coreAndroid.buildSrc.main.iml" filepath="$PROJECT_DIR$/.idea/modules/coreAndroid.buildSrc.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/coreAndroid.buildSrc.test.iml" filepath="$PROJECT_DIR$/.idea/modules/coreAndroid.buildSrc.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/gateway/coreAndroid.gateway.iml" filepath="$PROJECT_DIR$/.idea/modules/gateway/coreAndroid.gateway.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/gateway/coreAndroid.gateway.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/gateway/coreAndroid.gateway.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/gateway/coreAndroid.gateway.main.iml" filepath="$PROJECT_DIR$/.idea/modules/gateway/coreAndroid.gateway.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/gateway/coreAndroid.gateway.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/gateway/coreAndroid.gateway.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/networkmanager/coreAndroid.networkmanager.iml" filepath="$PROJECT_DIR$/.idea/modules/networkmanager/coreAndroid.networkmanager.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/networkmanager/coreAndroid.networkmanager.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/networkmanager/coreAndroid.networkmanager.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/networkmanager/coreAndroid.networkmanager.main.iml" filepath="$PROJECT_DIR$/.idea/modules/networkmanager/coreAndroid.networkmanager.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/networkmanager/coreAndroid.networkmanager.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/networkmanager/coreAndroid.networkmanager.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/presentation/coreAndroid.presentation.iml" filepath="$PROJECT_DIR$/.idea/modules/presentation/coreAndroid.presentation.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/presentation/coreAndroid.presentation.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/presentation/coreAndroid.presentation.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/presentation/coreAndroid.presentation.main.iml" filepath="$PROJECT_DIR$/.idea/modules/presentation/coreAndroid.presentation.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/presentation/coreAndroid.presentation.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/presentation/coreAndroid.presentation.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/remote/coreAndroid.remote.iml" filepath="$PROJECT_DIR$/.idea/modules/remote/coreAndroid.remote.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/remote/coreAndroid.remote.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/remote/coreAndroid.remote.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/remote/coreAndroid.remote.main.iml" filepath="$PROJECT_DIR$/.idea/modules/remote/coreAndroid.remote.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/remote/coreAndroid.remote.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/remote/coreAndroid.remote.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/retrofit/coreAndroid.retrofit.iml" filepath="$PROJECT_DIR$/.idea/modules/retrofit/coreAndroid.retrofit.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/retrofit/coreAndroid.retrofit.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/retrofit/coreAndroid.retrofit.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/retrofit/coreAndroid.retrofit.main.iml" filepath="$PROJECT_DIR$/.idea/modules/retrofit/coreAndroid.retrofit.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/retrofit/coreAndroid.retrofit.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/retrofit/coreAndroid.retrofit.unitTest.iml" />
     </modules>
   </component>
 </project>

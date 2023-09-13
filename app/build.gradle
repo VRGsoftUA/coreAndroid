@@ -27,6 +27,8 @@ dependencies {
     implementation project(':retrofit')
     implementation project(':networkmanager')
     implementation project(':presentation')
+    implementation 'com.android.support:multidex:1.0.3'
+
 }
 repositories {
     mavenCentral()

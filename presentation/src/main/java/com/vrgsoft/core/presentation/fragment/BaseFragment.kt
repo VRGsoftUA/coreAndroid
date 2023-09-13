@@ -11,7 +11,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import com.vrgsoft.core.presentation.common.LayoutResProcessor
 import com.vrgsoft.core.presentation.common.importIfNotNull
 import com.vrgsoft.core.presentation.viewModel.BaseViewModel
@@ -144,7 +143,7 @@ abstract class BaseFragment<B : ViewDataBinding> : Fragment(), KodeinAware {
     //region utils
 
     inline fun <reified VM : BaseViewModelImpl> vm(factory: ViewModelProvider.Factory): VM =
-        ViewModelProviders.of(this, factory)[VM::class.java]
+        ViewModelProvider(this, factory)[VM::class.java]
 
     //endregion
 

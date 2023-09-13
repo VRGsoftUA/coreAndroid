@@ -22,10 +22,10 @@ internal class ActivityResultProcessor {
         val requestCode: Int,
         private val handler: (T) -> Unit,
         private val onCancel: () -> Unit,
-        private val getExtra: (Intent) -> T
+        private val getExtra: (Intent) -> T?
     ) {
         fun handle(data: Intent) {
-            getExtra(data).let(handler)
+            getExtra(data)?.let(handler)
         }
 
         fun sendCancelEvent() {
@@ -64,7 +64,7 @@ internal class ActivityResultProcessor {
         requestCode: Int,
         handler: (Intent) -> Unit,
         onCancel: () -> Unit = {}
-    ){
+    ) {
         RequestData(
             requestCode = requestCode,
             handler = handler,
@@ -115,17 +115,20 @@ internal class ActivityResultProcessor {
         handler: (T) -> Unit,
         onCancel: () -> Unit = {}
     ) {
-        RequestData(
+        val data: RequestData<T> = RequestData(
             requestCode = requestCode,
             handler = handler,
             getExtra = {
-                it.getParcelableExtra<T>(extraKey)
+                it.getParcelableExtra(extraKey)
             },
             onCancel = onCancel
-        ).let {
+        )
+
+        data.let {
             dataHandlers = dataHandlers + it
         }
     }
+
 
     /**
      * Processes data received from [Activity.onActivityResult]

@@ -8,7 +8,6 @@ import androidx.annotation.Nullable
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import com.vrgsoft.core.presentation.common.AppConfigurator
 import com.vrgsoft.core.presentation.common.importIfNotNull
 import com.vrgsoft.core.presentation.router.ActivityRouter
@@ -114,7 +113,7 @@ abstract class BaseActivity : AppCompatActivity(), KodeinAware {
     }
 
     inline fun <reified VM : BaseViewModelImpl> vm(factory: ViewModelProvider.Factory): VM =
-        ViewModelProviders.of(this, factory)[VM::class.java]
+        ViewModelProvider(this, factory)[VM::class.java]
 
     //region test methods
 
