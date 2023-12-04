@@ -27,7 +27,7 @@ class LayoutResProcessor(
             .replace("Binding", "")
             .split("(?<=[a-z])(?=[A-Z])|(?<=[A-Z])(?=[A-Z][a-z])".toRegex())
             .joinToString(separator = "_")
-            .toLowerCase(Locale.getDefault())
+            .toLowerCase(Locale.US)
 
         val resourceName = "${context.applicationContext?.packageName}:layout/$fragmentLayoutName"
         return context.resources.getIdentifier(resourceName, null, null)
